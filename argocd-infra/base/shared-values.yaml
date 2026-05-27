@@ -1,0 +1,10 @@
+global:
+  domain: argocd.nip.io
+
+configs:
+  params:
+    server.insecure: "true" # Offloads SSL handling to ingress/load-balancer
+
+  cm:
+    # Company-wide UI customization or standard parameters
+    ui.bannercontent: "Managed entirely via GitOps (crossplane-example)"

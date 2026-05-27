@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-root-manager
+  namespace: argocd
+  annotations:
+    # Guardrail 1: Prevents cascading manual deletion from stripping the cluster
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io 
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/letajmal/crossplane-example.git'
+    targetRevision: HEAD
+    path: argocd-infra/overlays/development
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      # Guardrail 2: SAFE MODE. Turning prune OFF here protects Argo CD from 
+      # deleting itself if the Git path is accidentally renamed or cleared.
+      prune: false 
+      selfHeal: true
+    syncOptions:
+      # Removed CreateNamespace because Argo CD is already bootstrapped here
+      - ApplyOutOfSyncOnly=true 
+      # Guardrail 3: Instructs the engine to drop validation schemas on CRDs 
+      # to prevent rolling upgrade locking issues.
+      - SkipDryRunOnMissingResource=true
+  
+  # Guardrail 4: Stop infinite sync loops caused by live cluster state adjustments
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas # Prevents conflicts if HPA overrides replica size
+    - group: ""
+      kind: Secret
+      jsonPointers:
+        - /data/token # Prevents tracking token regeneration loops

@@ -1,0 +1,22 @@
+# Surgical patch: Scale up repo server replicas for HA without touching Helm variables
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  replicas: 3
+---
+# Surgical patch: Inject a production-only corporate configuration key into argocd-cm
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+$patch: delete
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  # Appends or modifies specific strings in the rendered ConfigMap
+  admin.enabled: "false" # Disabling local admin account in Prod
