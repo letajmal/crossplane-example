@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-root-manager
+  name: argocd
   namespace: argocd
   annotations:
     # Guardrail 1: Prevents cascading manual deletion from stripping the cluster
