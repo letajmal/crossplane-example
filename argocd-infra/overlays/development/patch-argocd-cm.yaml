@@ -1,0 +1,9 @@
+# argocd-infra/overlays/production/patch-argocd-cm.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  # This explicitly tells Kustomize to enable Helm inflation globally for this environment
+  kustomize.buildOptions: "--enable-helm"

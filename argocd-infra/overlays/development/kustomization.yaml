@@ -4,3 +4,6 @@ kind: Kustomization
 # Inherit everything from base unmodified for Dev
 resources:
   - ../../base
+
+patches:
+  - path: patch-argocd-cm.yaml
