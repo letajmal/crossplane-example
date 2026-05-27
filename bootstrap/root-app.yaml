@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: 'https://github.com/letajmal/crossplane-example.git'
     targetRevision: HEAD
-    path: argocd-infra/overlays/kind-kind
+    path: argocd-infra/overlays/development
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd

@@ -1,1 +1,2 @@
 argocd-infra/base/charts
+argocd-infra/overlays/development/repo.yaml
