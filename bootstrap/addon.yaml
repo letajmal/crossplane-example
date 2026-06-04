@@ -1,20 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap-cluster-app
+  name: addon
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io 
 spec:
   project: default
   source:
     repoURL: 'https://github.com/letajmal/crossplane-example.git'
     targetRevision: HEAD
-    path: bootstrap
+    path: addon
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: argocd
   syncPolicy:
     automated:
-      prune: false
+      prune: false 
       selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true 
+      - SkipDryRunOnMissingResource=true
