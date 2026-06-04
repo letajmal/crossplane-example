@@ -1,23 +1,34 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: addon
+  name: addons
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io 
 spec:
-  project: default
-  source:
-    repoURL: 'https://github.com/letajmal/crossplane-example.git'
-    targetRevision: HEAD
-    path: addon
-  destination:
-    server: 'https://kubernetes.default.svc'
-  syncPolicy:
-    automated:
-      prune: false 
-      selfHeal: true
-    syncOptions:
-      - ApplyOutOfSyncOnly=true 
-      - SkipDryRunOnMissingResource=true
-      - CreateNamespace=true
+  generators:
+    - git:
+        repoURL: https://github.com/letajmal/crossplane-example.git
+        revision: HEAD
+        directories:
+          - path: addon/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/letajmal/crossplane-example.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+        syncOptions:
+          - ApplyOutOfSyncOnly=true
+          - SkipDryRunOnMissingResource=true
+          - CreateNamespace=true
