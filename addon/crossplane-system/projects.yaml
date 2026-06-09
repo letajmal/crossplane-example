@@ -4,10 +4,8 @@ metadata:
   name: crossplane-test-project
 spec:
   forProvider:
-    # If not set, metadata.name will be used instead.
     name: "crossplane test"
-    namespaceIdRef:
-      name: minimum-viable-platforms
+    namespaceId: 1777
     description: "crossplane test project"
     buildGitStrategy: "fetch"
   providerConfigRef:
