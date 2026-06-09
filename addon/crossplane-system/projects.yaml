@@ -9,7 +9,7 @@ spec:
     description: "crossplane test project"
     buildGitStrategy: "fetch"
   providerConfigRef:
-    name: gitlab-provider
+    name: provider-gitlab
     kind: ProviderConfig
   # a reference to a Kubernetes secret to which the controller will write the runnersToken
   writeConnectionSecretToRef:
