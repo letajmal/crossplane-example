@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     name: "crossplane test"
-    namespaceId: 1777
+    namespaceId: 101312059
     description: "crossplane test project"
     buildGitStrategy: "fetch"
   providerConfigRef:
