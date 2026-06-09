@@ -14,3 +14,22 @@ spec:
   # a reference to a Kubernetes secret to which the controller will write the runnersToken
   writeConnectionSecretToRef:
     name: gitlab-project-crossplane-test-project
+
+---
+
+apiVersion: projects.gitlab.m.crossplane.io/v1alpha1
+kind: Project
+metadata:
+  name: crossplane-test-project-2
+spec:
+  forProvider:
+    name: "crossplane-test-2"
+    namespaceId: 101312059
+    description: "crossplane test project 2"
+    buildGitStrategy: "fetch"
+  providerConfigRef:
+    name: gitlab-provider
+    kind: ProviderConfig
+  # a reference to a Kubernetes secret to which the controller will write the runnersToken
+  writeConnectionSecretToRef:
+    name: gitlab-project-crossplane-test-project-2
