@@ -6,4 +6,7 @@ helmCharts:
     repo: https://charts.crossplane.io/stable
     version: 2.3.1 # Define the global chart version here
     releaseName: crossplane
-    namespace: crossplane
+    namespace: crossplane-system
+
+resources:
+  - gitlab-provider.yaml
