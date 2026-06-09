@@ -33,3 +33,22 @@ spec:
   # a reference to a Kubernetes secret to which the controller will write the runnersToken
   writeConnectionSecretToRef:
     name: gitlab-project-crossplane-test-project-2
+
+---
+
+apiVersion: projects.gitlab.m.crossplane.io/v1alpha1
+kind: Project
+metadata:
+  name: innovation-hub
+spec:
+  forProvider:
+    name: "innovation-hub"
+    namespaceId: 101312059
+    description: "innovation hub project"
+    buildGitStrategy: "fetch"
+  providerConfigRef:
+    name: gitlab-provider
+    kind: ProviderConfig
+  # a reference to a Kubernetes secret to which the controller will write the runnersToken
+  writeConnectionSecretToRef:
+    name: gitlab-project-crossplane-test-project-2
