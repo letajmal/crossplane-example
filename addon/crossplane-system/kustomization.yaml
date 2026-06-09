@@ -10,3 +10,4 @@ helmCharts:
 
 resources:
   - gitlab-provider.yaml
+  - projects.yaml
