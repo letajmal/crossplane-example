@@ -20,12 +20,12 @@ spec:
 apiVersion: projects.gitlab.m.crossplane.io/v1alpha1
 kind: Project
 metadata:
-  name: crossplane-test-project-2
+  name: crossplane-test-project-3
 spec:
   forProvider:
-    name: "crossplane-test-2"
+    name: "crossplane-test-3"
     namespaceId: 101312059
-    description: "crossplane test project 2"
+    description: "crossplane test project 3"
     buildGitStrategy: "fetch"
   providerConfigRef:
     name: gitlab-provider
