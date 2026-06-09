@@ -51,4 +51,4 @@ spec:
     kind: ProviderConfig
   # a reference to a Kubernetes secret to which the controller will write the runnersToken
   writeConnectionSecretToRef:
-    name: gitlab-project-crossplane-test-project-2
+    name: gitlab-project-innovation-hub
